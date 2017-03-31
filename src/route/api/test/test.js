@@ -1,7 +1,5 @@
 import Base from './../base';
-import {
-  test
-} from './../../../controller/';
+import test from './../../../proxy/test';
 
 /**
  * Tips: 方法名不能重复

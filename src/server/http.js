@@ -44,6 +44,7 @@ class HTTP {
   }
 
   errorLog = (e, req, res, next) => {
+    logger.error('express-errorLog', e);
     next(e);
   };
 
