@@ -29,7 +29,7 @@ test('/article/list', async t => {
     method: 'POST',
     uri: 'http://localhost:5050/article/list',
     body: {
-      text: '梅西'
+      sentence: '请帮我搜索梅西相关的文章'
     },
     json: true
   };
