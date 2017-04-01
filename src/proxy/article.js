@@ -39,7 +39,7 @@ export default new class {
         result
       };
     } catch (err) {
-      logger.debug('proxy.article.list.error', err);
+      logger.error('proxy.article.list.error', err);
       throw err;
     }
   }

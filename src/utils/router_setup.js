@@ -38,9 +38,9 @@ routes = {
 export default function (router, routes) {
   for (const key of Object.keys(routes)) {
     const elements = routes[key];
+    const subRouter = express.Router();
     for (const element of elements) {
       const method = element[0].toLowerCase();
-      const subRouter = express.Router();
       subRouter[method](`${element[1]}`, paramsParser.json, element[2], handler(element));
       router.use(`/${key}`, subRouter);
     }
