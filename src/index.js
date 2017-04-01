@@ -7,6 +7,7 @@ import HTTP from './server/http';
 import config from './config';
 
 global.logger = Logger.getLogger(config.logger.category);
+logger.setLevel(config.logger.level);
 
 const port = process.env.PORT || 5050;
 
@@ -19,9 +20,7 @@ async function main() {
     server.use(router.apiRouter);
     server.start();
   } catch (e) {
-    logger.error({
-      err: e
-    }, 'main.error');
+    logger.error('main err = ', e);
   }
 }
 

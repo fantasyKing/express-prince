@@ -22,7 +22,8 @@ export default new class {
             return true;
           }
           return false;
-        }).map((ele) => ele.word).join(' ') || '';
+        }).map((ele) => ele.word).join(' ')
+        .trim() || '';
 
         req.params.text = weights || '';
       }
