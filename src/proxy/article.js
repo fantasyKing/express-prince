@@ -1,7 +1,5 @@
 import { Article } from './../model';
 
-const SEARCH_FIELDS = ['title', 'description', 'text'];
-
 export default new class {
   /**
    * 获取文章列表

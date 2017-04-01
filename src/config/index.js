@@ -5,7 +5,6 @@ const env = process.env.NODE_ENV || 'development';
 
 let common = null;
 let mongo = null;
-let service = null;
 if (env === 'production') {
   common = require('./prod_common');
   mongo = require('./prod_mongo');
