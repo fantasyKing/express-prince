@@ -32,6 +32,9 @@ export default new class {
         }
       }
     }
+    if (req.ms_request_id) {
+      params.ms_request_id = req.ms_request_id;
+    }
     return params;
   }
 };

@@ -3,8 +3,9 @@
  */
 import test from 'ava';
 import rq from 'request-promise';
+import util from 'util';
 
-test('test', async t => {
+test.skip('test', async t => {
   const options = {
     method: 'POST',
     uri: 'http://localhost:5050/test',
@@ -15,7 +16,26 @@ test('test', async t => {
   };
   try {
     const result = await rq(options);
-    console.log('result', result);
+    console.log('result', util.inspect(result, { depth: null }));
+    t.truthy(result);
+  } catch (err) {
+    console.log('err', err.message);
+    t.falsy(false);
+  }
+});
+
+test('/article/list', async t => {
+  const options = {
+    method: 'POST',
+    uri: 'http://localhost:5050/article/list',
+    body: {
+      sentence: '帮我搜索梅西和罗本的比赛'
+    },
+    json: true
+  };
+  try {
+    const result = await rq(options);
+    console.log('result', util.inspect(result, { depth: null }));
     t.truthy(result);
   } catch (err) {
     console.log('err', err.message);

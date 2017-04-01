@@ -23,6 +23,9 @@ export default function (config, schemas, data_source_name, db_name) {
     const schema = new Schema(_schema.schema, { collection: _schema.collection });
     schema.set('toJSON', { getters: true, virtuals: true });
     schema.set('toObject', { getters: true, virtuals: true });
+    if (_schema.index) {
+      schema.index(_schema.index.fields, _schema.index.options);
+    }
     models[_schema.name] = database.model(_schema.name, schema);
   }
   return models;
