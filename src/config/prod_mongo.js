@@ -2,9 +2,9 @@
  * Created on 03/31/2017.
  */
 export default {
-  user: {
-    uri: 'mongodb://192.168.100.100,192.168.100.101/user',
-    sid: 'user',
+  spider: {
+    uri: 'mongodb://192.168.202.210,192.168.202.211/spider',
+    sid: 'spider',
     options: {
       db: {
         native_parser: true
@@ -19,11 +19,11 @@ export default {
       replset: {
         rs_name: 'foba'
       },
-      user: 'user',
-      pass: 'test'
+      user: 'spider',
+      pass: 'spider'
     },
     dbs: [{
-      name: 'user',
+      name: 'spider',
       default: true
     }]
   }
