@@ -1,9 +1,7 @@
 dist:
-  rm - rf dist && mkdir dist && \
-  . / node_modules / .bin / babel src--out - dir dist && \
-  cp package.json dist / \
+  ./node_modules/.bin/babel src --out-dir dist
 
-  start:
-  . / node_modules / .bin / babel - node src / index.js
+start:
+  ./node_modules/.bin/babel-node src/index.js
 
-  .PHONY: test build dist start example client
+.PHONY: dist start
