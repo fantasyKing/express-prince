@@ -4,6 +4,7 @@ import compression from 'compression';
 import cors from 'cors';
 import morgan from 'morgan';
 import requestId from 'request-id/express';
+import busboy from 'connect-busboy';
 
 class HTTP {
   constructor(opts) {
@@ -31,6 +32,7 @@ class HTTP {
       extended: true
     }));
     this.use(compression());
+    this.use(busboy({ limits: { fileSize: 200 * 1024 * 1024 } })); // 文件上传最大200M
 
     this.app.all('*', (req, res, next) => {
       req.header('Access-Control-Request-Headers', '*');

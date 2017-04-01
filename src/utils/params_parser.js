@@ -6,9 +6,7 @@ export default new class {
       return next();
     } catch (err) {
       req.params = {};
-      logger.error({
-        err
-      }, 'auth.parse_params.error');
+      logger.error('params_parser.error', err);
       return next();
     }
   }

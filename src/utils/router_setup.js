@@ -41,7 +41,7 @@ export default function (router, routes) {
     const subRouter = express.Router();
     for (const element of elements) {
       const method = element[0].toLowerCase();
-      subRouter[method](`${element[1]}`, paramsParser.json, element[2], handler(element));
+      subRouter[method](`${element[1]}`, element[2], paramsParser.json, handler(element));
       router.use(`/${key}`, subRouter);
     }
   }
