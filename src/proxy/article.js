@@ -1,5 +1,14 @@
 import { Article } from './../model';
 
+const PROJECTION = {
+  title: 1,
+  description: 1,
+  url: 1,
+  display_time: 1,
+  thumb: 1,
+  article_id: 2
+};
+
 export default new class {
   /**
    * 获取文章列表
@@ -25,7 +34,7 @@ export default new class {
         query.$text = { $search: text };
       }
       logger.debug('query--->', query);
-      const articles = await Article.find(query, null, filter).exec();
+      const articles = await Article.find(query, PROJECTION, filter).exec();
 
       const result = [];
       for (const article of articles) {
