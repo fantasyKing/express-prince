@@ -4,7 +4,7 @@ import nodejieba from 'nodejieba';
 test('jieba', async t => {
   try {
     let sentence = '我是拖拉机学院手扶拖拉机专业的。不用多久，我就会升职加薪，当上CEO，走上人生巅峰。';
-    sentence = '请帮我搜索梅西相关的文章';
+    // sentence = '请帮我搜索梅西相关的文章';
     sentence = '帮我搜索梅西和罗本的比赛';
     sentence = '搜索西甲梅西';
 

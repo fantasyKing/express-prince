@@ -24,14 +24,7 @@ export default new class {
       const filter = { sort: '-display_time', skip: (page - 1) * limit, limit };
 
       if (text) {
-        const $or = [];
-        for (const field of SEARCH_FIELDS) {
-          const obj = {};
-          const reg = new RegExp(`${text}`, 'i');
-          obj[field] = reg;
-          $or.push(obj);
-        }
-        query.$or = $or;
+        query.$text = { $search: text };
       }
       logger.debug('query--->', query);
       const articles = await Article.find(query, null, filter).exec();
