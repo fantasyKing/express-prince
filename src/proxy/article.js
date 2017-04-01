@@ -41,7 +41,7 @@ export default new class {
         result.push(article.obj());
       }
 
-      const pagination = { page, limit, timestamp };
+      const pagination = { page, limit, timestamp, text };
 
       return {
         pagination,

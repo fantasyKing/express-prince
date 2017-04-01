@@ -5,8 +5,8 @@ test('jieba', async t => {
   try {
     let sentence = '我是拖拉机学院手扶拖拉机专业的。不用多久，我就会升职加薪，当上CEO，走上人生巅峰。';
     sentence = '请帮我搜索梅西相关的文章';
-    sentence = '帮我搜索梅西参加的比赛';
-    sentence = '梅西';
+    sentence = '帮我搜索梅西和罗本的比赛';
+    sentence = '搜索西甲梅西';
 
     let result;
 
@@ -32,7 +32,7 @@ test('jieba', async t => {
     result = nodejieba.tag(sentence);
     console.log('result 6 --->', result);
 
-    const topN = 3;
+    const topN = 10;
     result = nodejieba.extract(sentence, topN);
     console.log('result 7 --->', result);
 
