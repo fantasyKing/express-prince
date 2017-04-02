@@ -1,9 +1,11 @@
 import fs from 'fs';
 import moment from 'moment';
 import uuid from 'uuid';
+import del from 'del';
 
 import config from './../config';
 import FFmpeg from './../utils/ffmpeg';
+import BaiduVoice from './../utils/baiduvoice';
 
 const DEFAULT = 'amr';
 
@@ -28,7 +30,24 @@ export default new class {
           const file_path = this.__getSaveFolder() + fileName;
           await FFmpeg.convert(fileStream, file_path);
           logger.debug('FFmpeg finish----->');
+
           // 调用百度语音，转换text，删除语音文件
+          const voiceData = await this.readFile(file_path, 'base64');
+          if (!voiceData) {
+            return res.json({ code: 0, message: 'file is empty' });
+          }
+
+          const fileStat = await this.fileStat(file_path);
+          logger.debug('start delete file');
+          await del([file_path]);
+
+          const voiceText = await BaiduVoice.speechToText('amr', voiceData, fileStat.size, config.language);
+          logger.debug('voiceText--->', voiceText);
+          if (!voiceText) {
+            return res.json({ code: 0, message: '无法识别您说的内容' });
+          }
+
+          req.body['text'] = voiceText;
           next();
         } catch (err) {
           logger.error('busboy err = ', err);
@@ -48,20 +67,6 @@ export default new class {
       res.json({ code: 0, message: 'syetem error' });
     }
   }
-
-  __saveFile = (path, file) => new Promise((resolve, reject) => {
-    const fstream = fs.createWriteStream(path);
-    file.pipe(fstream);
-    fstream.on('close', () => {
-      resolve({ fileSize: fstream.bytesWritten });
-    });
-    fstream.on('error', (err) => {
-      reject(err);
-    });
-    fstream.on('progress', (progress) => {
-      logger.debug(`chunk size: ${progress.delta}`);
-    });
-  });
 
   __getSaveFolder = () => {
     const _path = config.public_path + config.upload_path;
@@ -89,14 +94,21 @@ export default new class {
     });
   });
 
-  __getFileType = (fileName) => {
-    if (!fileName) {
-      return '';
-    }
-    const idx = fileName.lastIndexOf('.');
-    if (idx === -1) {
-      return fileName;
-    }
-    return fileName.substring(idx);
-  };
+  readFile = (filepath, encode) => new Promise((resolve, reject) => {
+    fs.readFile(filepath, encode, (err, data) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(data);
+    });
+  });
+
+  fileStat = (filepath) => new Promise((resolve, reject) => {
+    fs.stat(filepath, (err, stats) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(stats);
+    });
+  });
 };

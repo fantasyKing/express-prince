@@ -9,5 +9,10 @@ module.exports = {
     level: 'DEBUG'
   },
   public_path: path.resolve(__dirname, '../public'),
-  upload_path: '/upload/'
+  upload_path: '/upload/',
+  baidu_voice: {
+    appid: 'yLabOQwDb3pjGa1T5lzgKovm',
+    appsecret: '0a8a7266cd6a2ed7b0e64eb4b6086280'
+  },
+  language: 'en'
 };
