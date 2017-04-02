@@ -3,9 +3,17 @@ import moment from 'moment';
 import uuid from 'uuid';
 
 import config from './../config';
+import FFmpeg from './../utils/ffmpeg';
+
+const DEFAULT = 'amr';
 
 export default new class {
-  parse = (req, res, next) => {
+  ConvertToAmr = (req, res, next) => {
+    this.parse(req, res, next, 'amr');
+  }
+
+  parse = (req, res, next, type) => {
+    let fileFlag = false;
     if (req.busboy) {
       req.busboy.on('field', (key, value) => {
         logger.debug('field', key, value);
@@ -14,16 +22,30 @@ export default new class {
 
       req.busboy.on('file', async (fieldname, fileStream, filename, encoding, mimetype) => {
         logger.debug('busboy file ', fieldname, filename, encoding, mimetype);
-        const _fileName = `${moment().format('YYYYMMDDHHmmss')}_${uuid.v4()}${this.__getFileType(filename)}`;
-        const file_path = this.__getSaveFolder() + _fileName;
-        await this.__checkFile(file_path);
-        await this.__saveFile(file_path, fileStream);
+        try {
+          fileFlag = true;
+          const fileName = `${moment().format('YYYYMMDDHHmmss')}_${uuid.v4()}.${type || DEFAULT}`;
+          const file_path = this.__getSaveFolder() + fileName;
+          await FFmpeg.convert(fileStream, file_path);
+          logger.debug('FFmpeg finish----->');
+          // 调用百度语音，转换text，删除语音文件
+          next();
+        } catch (err) {
+          logger.error('busboy err = ', err);
+          return res.json({ code: 0, message: 'upload file failed, please try later' });
+        }
       });
+
       req.busboy.on('finish', () => {
         logger.debug('busboy finish...');
-        next();
+        if (!fileFlag) {
+          return res.json({ code: 0, message: 'no file to convert' });
+        }
       });
+
       req.pipe(req.busboy);
+    } else {
+      res.json({ code: 0, message: 'syetem error' });
     }
   }
 
