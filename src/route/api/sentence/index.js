@@ -5,7 +5,7 @@ import sentence from './sectence';
 
 export default [
   // [method, route, [middlewares], handler, [params], [params_options], [params_types]]
-  ['POST', '/text', [parseForm.parse, segment.parse], sentence.text, ['sentence'],
+  ['POST', '/text', [parseForm.ConvertToAmr, segment.parse], sentence.text, ['sentence'],
     [0],
     ['string']
   ]

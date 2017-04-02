@@ -41,7 +41,7 @@ export default new class {
           logger.debug('start delete file');
           await del([file_path]);
 
-          const voiceText = await BaiduVoice.speechToText('amr', voiceData, fileStat.size, config.language);
+          const voiceText = await BaiduVoice.speechToText(type, voiceData, fileStat.size, config.language);
           logger.debug('voiceText--->', voiceText);
           if (!voiceText) {
             return res.json({ code: 0, message: '无法识别您说的内容' });
