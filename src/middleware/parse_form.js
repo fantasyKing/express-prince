@@ -47,7 +47,7 @@ export default new class {
             return res.json({ code: 0, message: '无法识别您说的内容' });
           }
 
-          req.body['text'] = voiceText;
+          req.body['sentence'] = voiceText;
           next();
         } catch (err) {
           logger.error('busboy err = ', err);
