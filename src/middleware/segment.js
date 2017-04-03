@@ -3,7 +3,7 @@ import nodejieba from 'nodejieba';
 export default new class {
   parse = (req, res, next) => {
     try {
-      const sentence = req.params.sentence;
+      const sentence = req.body.sentence;
       if (sentence) {
         const topN = 3;
         let weights = nodejieba.extract(sentence, topN); // 保留前两位中n开头和x词性的词
