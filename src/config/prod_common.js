@@ -6,7 +6,7 @@ const path = require('path');
 module.exports = {
   logger: {
     category: 'express-prince',
-    level: 'ERROR'
+    level: 'DEBUG'
   },
   public_path: path.resolve(__dirname, '../public'),
   upload_path: '/upload/',
@@ -14,5 +14,5 @@ module.exports = {
     appid: 'yLabOQwDb3pjGa1T5lzgKovm',
     appsecret: '0a8a7266cd6a2ed7b0e64eb4b6086280'
   },
-  language: 'en'
+  language: 'zh'
 };
