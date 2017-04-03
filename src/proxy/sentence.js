@@ -1,11 +1,11 @@
 export default new class {
   text = async (params) => {
     try {
-      const { sentence } = params;
-      if (!sentence) {
+      const { text } = params;
+      if (!text) {
         throw new Error('未解析到关键词');
       }
-      return sentence;
+      return text;
     } catch (err) {
       logger.error('proxy.segment.text.error', err);
       throw err;

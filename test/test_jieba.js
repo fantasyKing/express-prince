@@ -32,7 +32,7 @@ test('jieba', async t => {
     result = nodejieba.tag(sentence);
     console.log('result 6 --->', result);
 
-    const topN = 10;
+    const topN = 2;
     result = nodejieba.extract(sentence, topN);
     console.log('result 7 --->', result);
 

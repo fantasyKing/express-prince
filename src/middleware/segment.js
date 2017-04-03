@@ -5,9 +5,8 @@ export default new class {
     try {
       const sentence = req.body.sentence;
       if (sentence) {
-        const topN = 3;
-        let weights = nodejieba.extract(sentence, topN); // 保留前两位中n开头和x词性的词
-        weights = weights.slice(0, 2);
+        const topN = 2;
+        let weights = nodejieba.extract(sentence, topN); // 保留前两位中n和x词性的词
 
         const tags = nodejieba.tag(sentence);
 
@@ -25,7 +24,7 @@ export default new class {
         }).map((ele) => ele.word).join(' ')
         .trim() || '';
 
-        req.params.text = weights || '';
+        req.body.text = weights || '';
       }
       return next();
     } catch (err) {
