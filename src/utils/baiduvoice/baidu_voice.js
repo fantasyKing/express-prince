@@ -36,9 +36,9 @@ export default class API extends SpeechToText {
   }
 
   preRequest = async (method, ...args) => {
-    let token = await this.getToken();
-    token = token && new AccessToken(token.accessToken, token.expireTime).isValid();
-    if (token) {
+    const token = await this.getToken();
+    const accessToken = token && new AccessToken(token.accessToken, token.expireTime);
+    if (token && accessToken.isValid()) {
       this.token = token;
       return await method.apply(this, args);
     }
@@ -47,9 +47,9 @@ export default class API extends SpeechToText {
   }
 
   getLatestToken = async () => {
-    let token = await this.getToken();
-    token = token && new AccessToken(token.accessToken, token.expireTime).isValid();
-    if (token && token.isValid()) {
+    const token = await this.getToken();
+    const accessToken = token && new AccessToken(token.accessToken, token.expireTime);
+    if (token && accessToken.isValid()) {
       return token;
     }
     return await this.getAccessToken();
