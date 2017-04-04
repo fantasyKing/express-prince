@@ -13,7 +13,7 @@
 |page|number|0|当前页码|
 |limit|number|0|每页显示数量|
 |timestamp|number|0|显示文章的最晚时间|
-|sentence|string|0|关键词|
+|text|string|0|关键词(梅西 罗本)要用空格隔开|
 
 * 返回结果
 
@@ -32,5 +32,24 @@
       id: "文章的mongoid"
     }]
   }
+}
+```
+
+2. /sectence/text
+
+* method POST
+
+* 参数
+
+```text
+采用form-data的提交方式，将.aac类型的文件post到该url下
+```
+
+* 返回结果
+
+```json
+{
+  code: 1,
+  result: "梅西 罗本"
 }
 ```
