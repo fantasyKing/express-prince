@@ -99,6 +99,8 @@ NODE_ENV=production pm2 startOrRestart ecosystem.json
 
 2. 设置编码的选项
 
+>配置过程中可能会提示某些包无法找到的错误，需要先安装相应的包，在执行该命令。
+
 ```bash
 ./configure --prefix=/usr/local/ffmpeg --enable-shared --disable-yasm --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --enable-libfdk-aac --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libwavpack --enable-libx264 --enable-libxvid --disable-lzma --enable-nonfree
 ```
