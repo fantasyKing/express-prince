@@ -21,7 +21,7 @@
 {
   "code": 1,
   "result": {
-    "pagination": { page: "当前页码", limit: "当前页显示的数量", timestamp: "显示文章的最晚的时间", text: "搜索的关键字(梅西 罗本)" },
+    "pagination": { "page": "当前页码", "limit": "当前页显示的数量", "timestamp": "显示文章的最晚的时间", "text": "搜索的关键字(梅西 罗本)" },
     "result": [{
       "title": "文章标题",
       "description": "文章描述",
