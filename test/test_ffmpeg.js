@@ -68,9 +68,4 @@ convert();
 // make
 // sudo make install
 
-// --enable-shared --disable-yasm --prefix=/usr/local/ffmpeg --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --cc=clang 
-
-// --disable-yasm --prefix=/usr/local/ffmpeg --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --host-cflags= --host-ldflags= --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libwavpack --enable-libx264 --enable-libxvid --enable-opencl --disable-lzma --enable-nonfree --enable-vda
-
-
-// --prefix=/usr/local/Cellar/ffmpeg/3.2.4 --disable-yasm --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --host-cflags= --host-ldflags= --enable-libfdk-aac --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libwavpack --enable-libx264 --enable-libxvid --enable-opencl --disable-lzma --enable-nonfree --enable-vda
+// --prefix=/usr/local/ffmpeg --enable-shared --disable-yasm --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --enable-libfdk-aac --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libwavpack --enable-libx264 --enable-libxvid --disable-lzma --enable-nonfree

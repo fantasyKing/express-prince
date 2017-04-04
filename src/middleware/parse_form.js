@@ -43,11 +43,11 @@ export default new class {
 
           const voiceText = await BaiduVoice.speechToText(type, voiceData, fileStat.size, config.language);
           logger.debug('voiceText--->', voiceText);
-          if (!voiceText) {
+          if (!voiceText || !Array.isArray(voiceText) || !voiceText.length) {
             return res.json({ code: 0, message: '无法识别您说的内容' });
           }
 
-          req.body['sentence'] = voiceText;
+          req.body['sentence'] = voiceText[0];
           next();
         } catch (err) {
           logger.error('busboy err = ', err);
