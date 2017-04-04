@@ -64,8 +64,17 @@ convert();
 
 
 // git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
-// ./configure --enable-shared  --disable-yasm --prefix=/usr/local/ffmpeg
+// ./configure --prefix=/usr/local/ffmpeg --enable-shared --disable-yasm --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --enable-libfdk-aac --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libwavpack --enable-libx264 --enable-libxvid --disable-lzma --enable-nonfree
 // make
 // sudo make install
+// 在/etc/ld.so.conf.d/目录下创建一个新文件ffmpeg.conf, 文件的内容为:/usr/local/ffmpeg/lib
+// 再执行ldconfig，更新ld.so.cache，使修改生效
+
+// 为了在任何地方能够直接用ffmpeg命令运行
+// sudo ln -s /usr/local/ffmpeg/bin/ffmpeg /usr/local/bin/
+// sudo ln -s /usr/local/ffmpeg/bin/ffprobe /usr/local/bin/
+// sudo ln -s /usr/local/ffmpeg/bin/ffserver /usr/local/bin/
+
+// 另外，如果变成需要包含ffmpeg的头文件，最好将include目录下的ffmpeg复制到/usr/include中
 
 // --prefix=/usr/local/ffmpeg --enable-shared --disable-yasm --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --enable-libfdk-aac --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libwavpack --enable-libx264 --enable-libxvid --disable-lzma --enable-nonfree

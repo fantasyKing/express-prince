@@ -53,3 +53,90 @@
   result: "梅西 罗本"
 }
 ```
+
+## 项目部署
+
+所有的项目都需要先执行make dist编译。
+
+1. spider
+
+>爬虫服务采用fork方式部署。
+
+```bash
+cd /root/spider-prince/dist
+
+NODE_ENV=production pm2 start index.js --name="spider"
+```
+
+2. express
+
+>该项目为客户端提供api接口。需要采用cluster方式运行
+
+ecosystem.json
+
+```json
+{
+  "apps": [
+    {
+      "name": "express-prince",
+      "script": "index.js",
+      "instances": 1, // 视机器情况而定, 建议至少起动2个实例
+      "exec_mode": "cluster"
+    }
+  ]
+}
+```
+
+```bash
+cd /root/express-prince/dist
+
+NODE_ENV=production pm2 startOrRestart ecosystem.json
+```
+
+## ffmpeg包安装(ubantu)
+
+1. 执行 git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg，获取ffmpeg的sourcecode
+
+2. 设置编码的选项
+
+```bash
+./configure --prefix=/usr/local/ffmpeg --enable-shared --disable-yasm --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --enable-libfdk-aac --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libwavpack --enable-libx264 --enable-libxvid --disable-lzma --enable-nonfree
+```
+
+3. 编译源码
+
+```bash
+make
+```
+
+4. 安装一些引入的包
+
+```bash
+make install
+```
+
+5. 路径处理
+
+* 在/etc/ld.so.conf.d/目录下创建一个新文件`ffmpeg.conf`
+
+* 在文件中写入`/usr/local/ffmpeg/lib`
+
+* 执行ldconfig，更新ld.so.cache，使修改生效
+
+6. 使ffmpeg命令生效
+
+```bash
+sudo ln -s /usr/local/ffmpeg/bin/ffmpeg /usr/local/bin/
+
+sudo ln -s /usr/local/ffmpeg/bin/ffprobe /usr/local/bin/
+
+sudo ln -s /usr/local/ffmpeg/bin/ffserver /usr/local/bin/
+```
+
+7. 完成
+
+  在shell中输入ffmpeg命令，查看命令是否生效
+
+```bash
+ffmpeg
+```

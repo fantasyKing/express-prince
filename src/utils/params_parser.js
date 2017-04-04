@@ -1,4 +1,7 @@
 export default new class {
+  /**
+   * 解析http request 中的参数
+   */
   json = (req, res, next) => {
     try {
       const params = this.parseParams(req, req.method);

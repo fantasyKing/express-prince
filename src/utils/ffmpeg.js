@@ -1,6 +1,10 @@
 import ffmpeg from 'fluent-ffmpeg';
 
 export default new class {
+  /**
+   * @param {ReadableStream} fileStream 转换类型的目标文件流
+   * @param {string} filepath 转换结果保存地址
+   */
   convert = (fileStream, filepath) => new Promise((resolve, reject) => {
     new ffmpeg(fileStream)
       .withAudioBitrate(16)

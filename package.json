@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "ava",
-    "start": "babel-node",
+    "start": "babel-node ./src/index.js",
     "kill": "(lsof -i :5050 | awk '{print $2}' | xargs -n2 | awk '{print $2}' | xargs kill -9)"
   },
   "author": "Zhanggj",
