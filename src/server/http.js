@@ -5,6 +5,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import requestId from 'request-id/express';
 import busboy from 'connect-busboy';
+import config from './../../dist/config';
 
 class HTTP {
   constructor(opts) {
@@ -20,7 +21,7 @@ class HTTP {
     morgan.token('id', req => String(req.params && req.params.ms_request_id || ''));
     morgan.token('params', req => JSON.stringify(req.params || {}));
     morgan.token('type', () => 'access-log');
-    morgan.token('app', () => 'saas-ms-oa');
+    morgan.token('app', () => config.logger.category);
     this.use(morgan('[:date[iso]] [:type] :app [:id] [:method] [:url] [:status] [:response-time] :params'));
 
     this.use(cors());
