@@ -6,6 +6,10 @@ import express from 'express';
 import paramsParser from './params_parser';
 import validator from './validator';
 
+/**
+ * 处理http请求，业务处理
+ * @param {express Router} route
+ */
 function handler(route) {
   return (req, res, next) => {
     try {
@@ -34,6 +38,10 @@ routes = {
     [method, route, [middlewares], handler, [params], [params_options], [params_types]]
   ]
 }
+ */
+
+/**
+ * 构建express 路由
  */
 export default function (router, routes) {
   for (const key of Object.keys(routes)) {

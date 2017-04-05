@@ -7,7 +7,7 @@ export default {
     thumb: { type: String },
     type: { type: String },
     text: { type: String },
-    article_id: { type: String }
+    article_id: { type: String, unique: true }
   },
   name: 'Article',
   collection: 'article'

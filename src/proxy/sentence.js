@@ -1,4 +1,7 @@
 export default new class {
+  /**
+   * 将经过语音转换和词法分析的结果返回给客户端
+   */
   text = async (params) => {
     try {
       const { text } = params;

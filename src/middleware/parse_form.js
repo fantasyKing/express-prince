@@ -10,6 +10,9 @@ import BaiduVoice from './../utils/baiduvoice';
 const DEFAULT = 'amr';
 
 export default new class {
+  /**
+   * 将语音的类型转换为amr类型，同时调用百度语音识别，将语音转换为text
+   */
   ConvertToAmr = (req, res, next) => {
     this.parse(req, res, next, 'amr');
   }
@@ -28,7 +31,7 @@ export default new class {
           fileFlag = true;
           const fileName = `${moment().format('YYYYMMDDHHmmss')}_${uuid.v4()}.${type || DEFAULT}`;
           const file_path = this.__getSaveFolder() + fileName;
-          await FFmpeg.convert(fileStream, file_path);
+          await FFmpeg.convert(fileStream, file_path); // 使用ffmpeg库，将语音转换为amr类型
           logger.debug('FFmpeg finish----->');
 
           // 调用百度语音，转换text，删除语音文件
@@ -37,18 +40,21 @@ export default new class {
             return res.json({ code: 0, message: 'file is empty' });
           }
 
+          // 获取文件的stat信息
           const fileStat = await this.fileStat(file_path);
           logger.debug('start delete file');
-          await del([file_path]);
+          await del([file_path]); // 删除本地语音文件
 
+          // 调用百度语音识别，将语音转换为文字
           const voiceText = await BaiduVoice.speechToText(type, voiceData, fileStat.size, config.language);
           logger.debug('voiceText--->', voiceText);
           if (!voiceText || !Array.isArray(voiceText) || !voiceText.length) {
             return res.json({ code: 0, message: '无法识别您说的内容' });
           }
 
+          // 将语音中的文字，绑定到sentence字段，转给下一个中间件
           req.body['sentence'] = voiceText[0];
-          next();
+          next(); // 调用下一个中间件
         } catch (err) {
           logger.error('busboy err = ', err);
           return res.json({ code: 0, message: 'upload file failed, please try later' });
