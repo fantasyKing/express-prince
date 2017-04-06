@@ -4,11 +4,12 @@ export default new class {
    */
   text = async (params) => {
     try {
-      const { text } = params;
-      if (!text) {
-        throw new Error('未解析到关键词');
+      const { text, sentence } = params;
+      let result = text;
+      if (!result) {
+        result = sentence;
       }
-      return text;
+      return result;
     } catch (err) {
       logger.error('proxy.segment.text.error', err);
       throw err;
