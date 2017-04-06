@@ -35,7 +35,7 @@
 }
 ```
 
-2. /sectence/text
+2. /sentence/text
 
 * method POST
 
