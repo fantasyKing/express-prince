@@ -7,7 +7,7 @@ import sectence from './../../../proxy/sentence';
 
 export default new class extends Base {
   /**
-   * 测试接口
+   * 返回语音中解析出来的搜索关键词
    * @method POST
    * @url sectence/text
    * @param req
