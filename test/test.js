@@ -27,9 +27,9 @@ test.skip('test', async t => {
 test('/article/list', async t => {
   const options = {
     method: 'GET',
-    uri: 'http://localhost:5050/article/list',
-    form: {
-      sentence: '梅西 罗本'
+    uri: 'http://192.168.202.3:5050/article/list',
+    qs: {
+      text: '梅西 罗本'
     },
     json: true
   };
