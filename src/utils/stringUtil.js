@@ -3,7 +3,7 @@ export default new class {
     if (!str || typeof str !== 'string') {
       return '';
     }
-    const reg = /(,|，|。|.|!|\?)$/i;
+    const reg = /(,|，|\.|。|\?|!|！+)$/i;
     return str.replace(reg, '');
   }
 };
