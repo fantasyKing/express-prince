@@ -9,6 +9,8 @@ const PROJECTION = {
   article_id: 2
 };
 
+const SEARCHKEYS = ['title', 'text', 'description'];
+
 export default new class {
   /**
    * 获取文章列表
@@ -31,7 +33,15 @@ export default new class {
       const filter = { sort: '-display_time', skip: (page - 1) * limit, limit };
 
       if (text) {
-        query.$text = { $search: text };
+        const $or = [];
+        const regStr = text.trim().split(' ').join('|');
+        for (const key of SEARCHKEYS) {
+          const obj = {};
+          const reg = new RegExp(`${regStr}`, 'i');
+          obj[key] = reg;
+          $or.push(obj);
+        }
+        query.$or = $or;
       }
       logger.debug('query--->', query);
       const articles = await Article.find(query, PROJECTION, filter).exec();
