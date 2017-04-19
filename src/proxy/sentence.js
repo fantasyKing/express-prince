@@ -7,11 +7,9 @@ export default new class {
   text = async (params) => {
     try {
       const { text, sentence } = params;
-      let result = text;
-      if (!result) {
-        result = sentence;
-      }
-      return stringUtil.removeComma(result);
+      const result = { text, sentence };
+      result.text = stringUtil.removeComma(result.text);
+      return result;
     } catch (err) {
       logger.error('proxy.segment.text.error', err);
       throw err;
