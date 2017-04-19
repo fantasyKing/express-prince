@@ -5,7 +5,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import requestId from 'request-id/express';
 import busboy from 'connect-busboy';
-import config from './../../dist/config';
+import config from './../config/index';
 
 class HTTP {
   constructor(opts) {
