@@ -4,7 +4,7 @@
 
 1. /article/list
 
-* mehtod POST
+* mehtod GET
 
 * 参数
 
